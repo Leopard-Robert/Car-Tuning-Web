@@ -1,0 +1,66 @@
+
+/* Global CSS Reset and Base Styles 
+  This file ensures a clean slate for the React components.
+*/
+
+:root {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  
+  /* Define some basic colors */
+  --color-primary: #007bff; /* Blue */
+  --color-success: #28a745; /* Green */
+  --color-danger: #dc3545; /* Red */
+  --color-warning: #ffc107; /* Yellow */
+  --color-text: #333;
+  --color-background: #fff;
+}
+
+/* Reset basic margins and padding */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  place-items: center;
+  font-size: 16px;
+}
+
+/* Base style for the main app container */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: left;
+  width: 100%;
+}
+
+/* Typography base */
+h1 {
+  font-size: 2.5em;
+  line-height: 1.1;
+}
+h2 {
+  font-size: 2em;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Button style adjustments */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
