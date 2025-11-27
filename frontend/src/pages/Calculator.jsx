@@ -3,6 +3,7 @@ import { useApi } from '../context/AuthContext.jsx'; // Added .js
 import Header from '../components/Header.jsx'; // Added .jsx
 import StageCard from '../components/StageCard.jsx'; // Added .jsx
 import TuningInsightGenerator from '../components/TuningInsightGenerator.jsx'; // Added .jsx
+import { Link } from 'react-router-dom';
 
 // Global cache for static brands data. This ensures the brands API is only called once 
 // per session, even if the component unmounts and remounts.
@@ -65,6 +66,9 @@ const CalculatorPage = () => {
         setSelType(null);
         setTypes([]);
         setLoading(true);
+
+
+
         try {
             const data = await fetchAPI(`models?brandId=${brand.id}`);
             setModels(data);
@@ -185,33 +189,32 @@ const CalculatorPage = () => {
         <div className="container">
             <Header />
 
-            <h1 style={{ marginBottom: '5px' }}>Tuning Calculator</h1>
-            <p style={{ color: 'var(--text-muted)', marginBottom: '30px' }}>
-                Find the best performance package for your vehicle.
-            </p>
-
             {/* Step 1: Brands */}
             {!selBrand && (
                 <div className="animate-in">
-                    <h2 style={{ marginBottom: '20px' }}>1. Select Manufacturer</h2>
+                    <h2 style={{ marginBottom: '20px', marginTop: '70px' }}>Select Manufacturer</h2>
                     {loading && brands.length === 0 ? (
                         <p style={{ textAlign: 'center', marginTop: '20px', color: 'var(--secondary)' }}>Loading brands...</p>
                     ) : (
                         <div className="grid-brands">
                             {brands.map(b => (
-                                <div
-                                    key={b.id}
-                                    onClick={() => handleBrand(b)}
-                                    className="card"
-                                    style={{ cursor: 'pointer', textAlign: 'center', padding: '20px', border: '2px solid var(--border)' }}>
-                                    <img
-                                        src={b.logoUrl || 'https://placehold.co/50x40/555/FFF?text=Logo'}
-                                        alt={b.name}
-                                        style={{ marginBottom: '10px', height: '40px', objectFit: 'contain' }}
-                                        onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/50x40/555/FFF?text=Logo' }}
-                                    />
-                                    <div style={{ fontWeight: 'bold' }}>{b.name}</div>
-                                </div>
+                                <Link to={`{b.name}`}>
+
+                                    <div
+                                        key={b.id}
+                                        onClick={() => handleBrand(b)}
+                                        className="card"
+                                        style={{ cursor: 'pointer', textAlign: 'center', padding: '20px', border: '1px solid var(--border)' }}>
+                                        <img
+                                            src={b.logoUrl || `assets/brand_logo/${b.name}.png`}
+                                            alt={b.name}
+                                            style={{ marginBottom: '10px', height: '90px', objectFit: 'contain' }}
+                                            onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/50x40/555/FFF?text=Logo' }}
+
+                                        />
+                                        <div style={{ fontWeight: 'bold' }}>{b.name}</div>
+                                    </div>
+                                </Link>
                             ))}
                         </div>
                     )}
@@ -227,7 +230,7 @@ const CalculatorPage = () => {
                     </div>
 
                     <div className="card" style={{ marginBottom: '30px' }}>
-                        <h3 style={{ marginTop: 0, color: 'var(--primary)' }}>2. Vehicle Selection</h3>
+                        <h2 style={{ marginTop: 0 }}>Vehicle Selection</h2>
 
                         {/* Model Selection */}
                         <label style={{ display: 'block', marginBottom: '5px', color: 'var(--text-muted)' }}>Model</label>
@@ -279,7 +282,7 @@ const CalculatorPage = () => {
                     {/* Results */}
                     {selEngine && (
                         <div style={{ marginTop: '40px' }}>
-                            <h2 style={{ color: 'var(--secondary)' }}>3. Performance Stages</h2>
+                            <h2 >Performance Stages</h2>
                             {stages.length > 0 ? (
                                 stages.map(stage => <StageCard key={stage.id} stage={stage} />)
                             ) : (

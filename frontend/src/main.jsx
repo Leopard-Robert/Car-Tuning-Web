@@ -60,6 +60,8 @@ const GlobalStyles = () => (
 
         .card:hover {
             box-shadow: var(--shadow-hover);
+            background-color: var(--bg-card);
+            transition: box-shadow 0.3s, background-color 0.3s;
         }
 
         .flex-center {
@@ -75,7 +77,7 @@ const GlobalStyles = () => (
 
         .grid-brands {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
         }
         
